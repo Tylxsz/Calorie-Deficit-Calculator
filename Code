@@ -1,0 +1,230 @@
+This code is curated in C++
+
+#include <iostream>
+#include <iomanip>
+#include <string>
+
+using namespace std;
+
+// Function to calculate BMR using the Mifflin-St Jeor Equation
+double calculateBMR(double weightKg, double heightCm, int age, char gender) {
+    if (gender == 'M' || gender == 'm') {
+        return (10.0 * weightKg) + (6.25 * heightCm) - (5.0 * age) + 5.0;
+    } else {
+        return (10.0 * weightKg) + (6.25 * heightCm) - (5.0 * age) - 161.0;
+    }
+}
+
+// Function to calculate Total Daily Energy Expenditure (TDEE) based on activity
+double calculateTDEE(double bmr, int activityChoice) {
+    switch (activityChoice) {
+        case 1: return bmr * 1.2;    // Sedentary
+        case 2: return bmr * 1.375;  // Lightly Active
+        case 3: return bmr * 1.55;   // Moderately Active
+        case 4: return bmr * 1.725;  // Very Active
+        case 5: return bmr * 1.9;    // Extra Active
+        default: return bmr;         // Default to BMR if invalid choice
+    }
+}
+
+int main() {
+    // Variables
+    double weight, height, bmr, tdee;
+    int age, activityChoice;
+    char gender;
+
+    // Formatting output to display 2 decimal places
+    cout << fixed << setprecision(2);
+
+    cout << "=== Welcome to the C++ Calorie Calculator ===\n\n";
+
+    // User inputs
+    cout << "Enter your gender (M/F): ";
+    cin >> gender;
+
+    cout << "Enter your age (years): ";
+    cin >> age;
+
+    cout << "Enter your weight (in kg): ";
+    cin >> weight;
+
+    cout << "Enter your height (in cm): ";
+    cin >> height;
+
+    // Output and select activity multiplier
+    cout << "\nSelect your daily activity level:\n";
+    cout << "1. Sedentary (little or no exercise)\n";
+    cout << "2. Lightly Active (light exercise 1-3 days/week)\n";
+    cout << "3. Moderately Active (moderate exercise 3-5 days/week)\n";
+    cout << "4. Very Active (hard exercise 6-7 days/week)\n";
+    cout << "5. Extra Active (very hard exercise, physical job)\n";
+    cout << "Enter choice (1-5): ";
+    cin >> activityChoice;
+
+    // Input Validation
+    if (age <= 0 || weight <= 0 || height <= 0 || (gender != 'M' && gender != 'm' && gender != 'F' && gender != 'f')) {
+        cout << "\nError: Invalid input data. Please run the program again with valid metrics.\n";
+        return 1;
+    }
+
+    // Calculations
+    bmr = calculateBMR(weight, height, age, gender);
+    tdee = calculateTDEE(bmr, activityChoice);
+
+    // Results Display
+    cout << "\n================ RESULTS ================\n";
+    cout << "Your Basal Metabolic Rate (BMR): " << bmr << " kcal/day\n";
+    cout << "Your Maintenance Calories (TDEE): " << tdee << " kcal/day\n";
+    cout << "-----------------------------------------\n";
+    cout << "To Lose Weight (-500 kcal):       " << (tdee - 500) << " kcal/day\n";
+    cout << "To Gain Weight (+500 kcal):       " << (tdee + 500) << " kcal/day\n";
+    cout << "=========================================\n";
+
+    return 0;
+}
+
+C#
+using System;
+
+class Program
+{
+    // Function to calculate BMR using the Mifflin-St Jeor Equation
+    static double CalculateBMR(double weightKg, double heightCm, int age, char gender)
+    {
+        if (gender == 'M' || gender == 'm')
+        {
+            return (10.0 * weightKg) + (6.25 * heightCm) - (5.0 * age) + 5.0;
+        }
+        else
+        {
+            return (10.0 * weightKg) + (6.25 * heightCm) - (5.0 * age) - 161.0;
+        }
+    }
+
+    // Function to calculate Total Daily Energy Expenditure (TDEE) based on activity
+    static double CalculateTDEE(double bmr, int activityChoice)
+    {
+        switch (activityChoice)
+        {
+            case 1: return bmr * 1.2;    // Sedentary
+            case 2: return bmr * 1.375;  // Lightly Active
+            case 3: return bmr * 1.55;   // Moderately Active
+            case 4: return bmr * 1.725;  // Very Active
+            case 5: return bmr * 1.9;    // Extra Active
+            default: return bmr;         // Default to BMR if invalid choice
+        }
+    }
+
+    static int Main()
+    {
+        // Variables
+        double weight, height, bmr, tdee;
+        int age, activityChoice;
+        char gender;
+
+        Console.WriteLine("=== Welcome to the C# Calorie Calculator ===\n");
+
+        // User inputs
+        Console.Write("Enter your gender (M/F): ");
+        gender = Convert.ToChar(Console.ReadLine());
+
+        Console.Write("Enter your age (years): ");
+        age = Convert.ToInt32(Console.ReadLine());
+
+        Console.Write("Enter your weight (in kg): ");
+        weight = Convert.ToDouble(Console.ReadLine());
+
+        Console.Write("Enter your height (in cm): ");
+        height = Convert.ToDouble(Console.ReadLine());
+
+        // Output and select activity multiplier
+        Console.WriteLine("\nSelect your daily activity level:");
+        Console.WriteLine("1. Sedentary (little or no exercise)");
+        Console.WriteLine("2. Lightly Active (light exercise 1-3 days/week)");
+        Console.WriteLine("3. Moderately Active (moderate exercise 3-5 days/week)");
+        Console.WriteLine("4. Very Active (hard exercise 6-7 days/week)");
+        Console.WriteLine("5. Extra Active (very hard exercise, physical job)");
+        Console.Write("Enter choice (1-5): ");
+        activityChoice = Convert.ToInt32(Console.ReadLine());
+
+        // Input Validation
+        if (age <= 0 || weight <= 0 || height <= 0 || (gender != 'M' && gender != 'm' && gender != 'F' && gender != 'f'))
+        {
+            Console.WriteLine("\nError: Invalid input data. Please run the program again with valid metrics.");
+            return 1;
+        }
+
+        // Calculations
+        bmr = CalculateBMR(weight, height, age, gender);
+        tdee = CalculateTDEE(bmr, activityChoice);
+
+        // Results Display
+        Console.WriteLine("\n================ RESULTS ================");
+        Console.WriteLine($"Your Basal Metabolic Rate (BMR): {bmr:F2} kcal/day");
+        Console.WriteLine($"Your Maintenance Calories (TDEE): {tdee:F2} kcal/day");
+        Console.WriteLine("-----------------------------------------");
+        Console.WriteLine($"To Lose Weight (-500 kcal):       {(tdee - 500):F2} kcal/day");
+        Console.WriteLine($"To Gain Weight (+500 kcal):       {(tdee + 500):F2} kcal/day");
+        Console.WriteLine("=========================================");
+
+        return 0;
+    }
+}
+
+Python
+def calculate_bmr(weight_kg: float, height_cm: float, age: int, gender: str) -> float:
+    if gender.lower() == 'm':
+        return (10.0 * weight_kg) + (6.25 * height_cm) - (5.0 * age) + 5.0
+    else:
+        return (10.0 * weight_kg) + (6.25 * height_cm) - (5.0 * age) - 161.0
+
+def calculate_tdee(bmr: float, activity_choice: int) -> float:
+    multipliers = {
+        1: 1.2,    # Sedentary
+        2: 1.375,  # Lightly Active
+        3: 1.55,   # Moderately Active
+        4: 1.725,  # Very Active
+        5: 1.9     # Extra Active
+    }
+    return bmr * multipliers.get(activity_choice, 1.0)
+
+def main():
+    print("=== Welcome to the Python Calorie Calculator ===\n")
+
+    try:
+        gender = input("Enter your gender (M/F): ").strip()
+        age = int(input("Enter your age (years): "))
+        weight = float(input("Enter your weight (in kg): "))
+        height = float(input("Enter your height (in cm): "))
+
+        print("\nSelect your daily activity level:")
+        print("1. Sedentary (little or no exercise)")
+        print("2. Lightly Active (light exercise 1-3 days/week)")
+        print("3. Moderately Active (moderate exercise 3-5 days/week)")
+        print("4. Very Active (hard exercise 6-7 days/week)")
+        print("5. Extra Active (very hard exercise, physical job)")
+        activity_choice = int(input("Enter choice (1-5): "))
+
+        # Input Validation
+        if age <= 0 or weight <= 0 or height <= 0 or gender.lower() not in ['m', 'f']:
+            print("\nError: Invalid input data. Please run the program again with valid metrics.")
+            return
+
+        # Calculations
+        bmr = calculate_bmr(weight, height, age, gender)
+        tdee = calculate_tdee(bmr, activity_choice)
+
+        # Results Display
+        print("\n================ RESULTS ================")
+        print(f"Your Basal Metabolic Rate (BMR): {bmr:.2f} kcal/day")
+        print(f"Your Maintenance Calories (TDEE): {tdee:.2f} kcal/day")
+        print("-----------------------------------------")
+        print(f"To Lose Weight (-500 kcal):       {tdee - 500:.2f} kcal/day")
+        print(f"To Gain Weight (+500 kcal):       {tdee + 500:.2f} kcal/day")
+        print("=========================================")
+
+    except ValueError:
+        print("\nError: Invalid input format. Please enter numeric values where required.")
+
+if __name__ == "__main__":
+    main()
